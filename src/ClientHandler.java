@@ -37,6 +37,8 @@ public class ClientHandler extends Thread {
     }
 
     private void broadcast(String message) {
-        writers.forEach(writer -> writer.println(message));
+        synchronized (writers) {
+            writers.forEach(writer -> writer.println(message));
+        }
     }
 }
